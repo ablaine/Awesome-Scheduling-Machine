@@ -1,0 +1,238 @@
+	Body {
+		padding: 0;
+		margin: 0;
+	}
+
+	a {
+		text-decoration: none;
+		color: #090;
+		cursor: pointer;
+	}
+	
+	a:link {
+		color: #090;
+	}
+
+	a:visited {
+		color: #090;
+	}
+	
+	a:active {
+		color: #ccc;
+	}
+	
+	a:hover {
+		color: #030;
+	}
+
+	a.remove {
+		color: #f00;
+	}
+
+	a.remove:hover {
+		color: #900;
+	}
+
+	em {
+		font-style: normal;
+		color: #f00;
+	}
+
+	h2 {
+		font-size: 20px;
+		display: inline;
+	}
+	
+	small {
+		font-size: smaller;
+	}
+
+	select {
+		margin-top: 2px;
+		margin-bottom: 2px;
+	}
+
+	form.searchResults {
+		padding: 4px;
+		border: 1px solid #000;
+	}
+
+/****************************
+ *                          *
+ *           TABS           *
+ *                          *
+ ****************************/
+	div.tabs-holder {
+		float: left;
+		width: 100%;
+	}
+	
+	div.tabs {
+		background-color: #e0e0e0;
+		float: left;
+		margin-top: 10px;
+		margin-left: 10px;
+		display: block;
+		border-top: 1px solid #000;
+		border-left: 1px solid #000;
+		border-right: 1px solid #000;
+		border-bottom: 1px solid #e0e0e0;
+		padding: 2px;
+	}
+
+	div.curTab {
+		background-color: #fff;
+		float: left;
+		margin-top: 10px;
+		margin-left: 10px;
+		display: block;
+		border-top: 1px solid #000;
+		border-left: 1px solid #000;
+		border-right: 1px solid #000;
+		border-bottom: 1px solid #e0e0e0;
+		padding: 2px;
+	}
+	
+	div.tabs a, div.curTab a {
+		color: #000;
+	}
+
+/****************************/
+	div#print, div#tutorial, div#about, div#back {
+		background-color: #e0e0e0;
+		float: right;
+		margin-bottom: 10px;
+		margin-right: 10px;
+		border-left: 1px solid;
+		border-right: 1px solid;
+		border-bottom: 1px solid;
+		padding: 0;
+	}
+
+	div#help {
+		padding-left: 50px;
+		display: block;
+		float: left;
+		margin-top: 12px;
+		font-size: 20px;
+		visibility: hidden;
+	}
+	
+/****************************
+ *                          *
+ *         TABLES           *
+ *                          *
+ ****************************/
+	table {
+		float: left;
+		width: 100%;
+		font-size: 12px;
+	}
+
+	th {
+		border-bottom: 2px solid #000;
+		padding: 4px;
+	}
+	
+	td.hour {
+		border-right: 0;
+	}
+	
+	table#schedule {
+		float: left;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		padding-bottom: 10px;
+		border-top: 1px solid #000;
+		border-bottom: 1px solid #000;
+		/*font-size: smaller;*/
+	}
+
+	table#schedule td {
+		font-size: 14px;
+		padding: 2px;
+	}
+
+	table#schedule th, table#schedule td {
+		border: 1px solid #000;
+	}
+
+	table#results tr {
+		border-bottom: 1px solid #000;
+		border-top: 1px solid #000;
+	}
+	
+	table#results td, table#results th {
+		border: 1px solid #000;
+	}
+
+	table#results td {
+		padding-top: 2px;
+		padding-bottom: 2px;
+	}
+
+/****************************/
+	div#searchResults1, div#searchResults2 {
+		width: 49%; /* 50% works well except on IE6. Haven't tested IE7 */
+	}
+	
+	div#searchResults1 {
+		float: left;
+	}
+
+	div#searchResults2 {
+		float: right;
+	}
+
+	div#search1, div#search2 {
+		width: 99%;
+		margin-left: 4px;
+		margin-right: 4px;
+		margin-bottom: 5px;
+		float: left;
+	}
+
+	div#search2 {
+		float: right;
+	}
+
+	div#results1, div#results2 {
+		width: 99%;
+		margin: 4px;
+	}
+	
+	div#courses {
+		border: 1px solid #000;
+		float: right;
+		width: 70%;
+	}
+	
+/****************************/
+	div#schedChooser {
+		float: left;
+		margin-left: 10px;
+		margin-top: 10px; /* NOTE: This helps display differences between browsers. */
+	}
+	
+/****************************
+ *                          *
+ *      COURSE COLORS       *
+ *                          *
+ ****************************/
+/* TODO: Remove a few of the colors and make sure the colors that are left constrast well. */
+	td.course0  { background-color: #ffff99; }
+	td.course1  { background-color: #99ccff; }
+	td.course2  { background-color: #ccff99; }
+	td.course3  { background-color: #ffcccc; }
+	td.course4  { background-color: #ffcc66; }
+	td.course5  { background-color: #cccc00; }
+	td.course6  { background-color: #ccff00; }
+	td.course7  { background-color: #99cc00; }
+	td.course8  { background-color: #cccccc; }
+	td.course9  { background-color: #ff6600; }
+	td.course10 { background-color: #00ffcc; }
+	td.course11 { background-color: #9966ff; }
+	td.course12 { background-color: #ccff99; }
+	td.course13 { background-color: #999966; }
+	td.course14 { background-color: #ccffcc; }

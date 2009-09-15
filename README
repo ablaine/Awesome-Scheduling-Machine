@@ -1,0 +1,28 @@
+<<< The Awesome Scheduling Machine >>>
+     << Future Vision Overview >>
+
+Visionaries/Authors: Andrew Blaine, Derrick Moyer, Will Swannack
+
+
+	The Awesome Scheduling Machine was created initially with incoming freshman in mind.  The idea was to provide a graphical tool for building a class schedule, or multiple schedules, that the student could print and have with them when registering for classes.  This tool would also benefit peer advisors when they sit down with their advising groups and help them select classes.  The ASM was built to resemble the way Cascade searches for classes and to look like the graphical schedule that Cascade provides each student with after they register for classes.
+	Our vision for the continued development of the ASM is a tool that provides the same features and functions of Cascade in a much simpler and easy to use manner.  Instead of having to search for classes using multiple browser tabs, the ASM provides two side by side search functions, the visual schedule, and the ability to build multiple schedules at once.  However, the ASM does not yet have all the same features as Cascade and so the addition of the missing features will help it realize its full potential for the UPS community.
+
+Here we will detail a list of extensions and upgrades that we think would best improve the usability of the ASM:
+	-Implement the Class Info feature found on Cascade.
+	-Display the number of students currently enrolled/class size in the results box.
+	-Rework the method of warning when adding conflicting classes so there is a less intrusive method than a pop up.
+	-Put a 'please wait' in the Results box while database queries are being made.
+	-Implement the Year/Term constraint while searching.  The issue here is that you probably don't want this field shown twice in both the search boxes as this could be confusing to a user.
+	-Provide different printing options, such as printing all four on one sheet, etc.
+	-Display a warning or simply not allow a student to add more than the allowed number of credits for a semester.
+	-The ability to save a schedule and get back to it after closing the browser window.
+	-Allowing the user to add other blocks to their schedule such as sports practices or their work schedules.
+	-The ability to register your classes through the ASM.
+
+Some final things to consider for the next group that works on the ASM:
+	-The tutorial is a very simple runthrough of all the features of the ASM and would have to be extended or redone to accomadate any new features.  Also, it is currently set up with screen shots and steps that are specific to the current term, Spring '09 and so the user would not be able to regenerate the same schedule if the default term was changed.
+
+
+
+Overview of the code:
+	When ASM.php is called it will make database queries through db/searchOptions.php for the various cascade like search constraints. Clicking on any of the tabs will interact with utilities.js to update which tab is current. Each time any of the schedule tabs are clicked, the schedule for the clicked tab is redisplayed via /include/schedManager.js. If a user were to click either "submit" buttons for making a search, the search options would be sent to db/ajax.js which will in turn call db/submitQuery.php with those search options. db/submitQuery.php then makes the database query and echos a table back to db/ajax.js and db/ajax.js will then use the DOM to place the table of courses in the results box. Each of the courses in the table will have onclick javascript functions for adding classinfo objects to the schedule (along with a number identifying which search/results box this course was clicked from) through include/schedManager.js. The schedManager then uses the DOM with the passed in number in order to determine which schedules are "checked". After the schedmanager has added all the courses to the relevent schedules, it then redisplays the schedule of the current tab. Removing a course will call the schedManager to remove the course from the schedule and then redisplay the schedule.

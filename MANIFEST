@@ -1,0 +1,24 @@
+Directories:
+	./db/ --> Holds all the files that interact directly and indirectly with the database.
+	./include/ --> Holds the css files and javascript files that handle updating visual effects of changing tabs and redisplaying a schedule.
+	./tutorial/ --> Holds all files related to displaying the tutorial.
+
+
+Files:
+	./ASM.php --> The main page, overall structure is here. Uses php for displaying 
+	./about.html --> Simple about the authors page.
+
+	./db/configdb.php --> Sets php vars for $dbhost, $dbuser, and $dbpass
+	./db/opendb.php --> Opens a database connection. Handle is $conn
+	./db/closedb.php --> Closes a database connection. Assumes handle is $conn
+	./db/searchOptions.php --> Prepares numerous functions for echoing out searchable constraints between <option> tags. (Ex. Instructor, department, ect.)
+	./db/ajax.js --> Called by clicking the submit button for either search/results box. Builds the url to submitQuery.php with the search constraints tacked on the end. Prints anything that was echoed by submitQuery.
+	./db/submitQuery.php --> Called by ajax.js, given the search constraints this makes the database query and echos a table containing the courses which satisfy those constraints.
+
+	./include/schedManager.js --> Tracks local information for schedules. Also deals with displaying schedules and adding/removing classes from them.
+	./include/utilities.js --> Holds small javascript functions for handling tabs, hiding/displaying div elements, preparing the page for printing and displaying the help text.
+	./include/reset.css --> Removes most default styles. Intended to allow work from a clean slate.
+	./include/main.css --> The visual style of the page.
+
+	./tutorial/ASMTutorial.html --> Tutorial documenting steps in learning how to use ASM.
+

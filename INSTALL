@@ -1,0 +1,6 @@
+1. To set up the ASM, place the files in a directory, viewable from the internet. In the base of the directory should be ASM.php, about.html and the folders db/, include/, tutorial/ and resources/ with their contents inside their respective folders.
+2. Navigate to db/configdb.php and change the database host, username and password.
+3. To check the database queries to make sure the table names reflect the actual database being used, look through db/submitQuery.php and db/searchOptions.php
+
+
+NOTE: the resources/ folder is a minor component and can safely be removed as long as the about.html page no longer links to the image held by that folder.
