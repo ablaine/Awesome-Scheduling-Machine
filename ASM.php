@@ -1,43 +1,47 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- Authors: Andrew Blaine
 			  Derrick Moyer
 			  Will Swannack
 -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<title>ASM</title>
-<link rel="stylesheet" href="include/reset.css" />
-<link rel="stylesheet" href="include/main.css" />
-<script src="db/ajax.js"></script>
-<script src="include/utilities.js"></script>
-<script src="include/schedManager.js"></script>
-<meta http-equiv="Content-Language" content="en-us" />
+	<title>ASM</title>
+	<meta http-equiv="Content-Language" content="en-us" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<link rel="stylesheet" type="text/css" href="include/reset.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="include/main.css" media="all" />
+	<script type="text/javascript" src="db/ajax.js"></script>
+	<script type="text/javascript" src="include/utilities.js"></script>
+	<script type="text/javascript" src="include/schedManager.js"></script>
 </head>
 <body>
 
 <div class="tabs-holder">
-	<div id="sched-1" class="curTab" ><a onClick="paramArray['tab-sched'].setCurTab('sched-1');changeActiveSched(0)">Schedule 1</a></div>
-	<div id="sched-2" class="tabs"><a onClick="paramArray['tab-sched'].setCurTab('sched-2');changeActiveSched(1)">Schedule 2</a></div>
-	<div id="sched-3" class="tabs"><a onClick="paramArray['tab-sched'].setCurTab('sched-3');changeActiveSched(2)">Schedule 3</a></div>
-	<div id="sched-4" class="tabs"><a onClick="paramArray['tab-sched'].setCurTab('sched-4');changeActiveSched(3)">Schedule 4</a></div>
+	<div id="sched-1" class="curTab" ><a onclick="paramArray['tab-sched'].setCurTab('sched-1');changeActiveSched(0)">Schedule 1</a></div>
+	<div id="sched-2" class="tabs"><a onclick="paramArray['tab-sched'].setCurTab('sched-2');changeActiveSched(1)">Schedule 2</a></div>
+	<div id="sched-3" class="tabs"><a onclick="paramArray['tab-sched'].setCurTab('sched-3');changeActiveSched(2)">Schedule 3</a></div>
+	<div id="sched-4" class="tabs"><a onclick="paramArray['tab-sched'].setCurTab('sched-4');changeActiveSched(3)">Schedule 4</a></div>
 	<div id="about"><a href="./about.html" target="_blank">About</a></div>
 	<div id="tutorial"><a href="./tutorial/ASMTutorial.html" target="_blank">Tutorial</a></div>
-	<div id="print"><a onClick="printPrep(getSchedIndex())">Print</a></div>
-	<div id="back" style="display: none"><a onClick="printBack(getSchedIndex())">Back</a></div>
+	<div id="print"><a onclick="printPrep(getSchedIndex())">Print</a></div>
+	<div id="back" style="display: none"><a onclick="printBack(getSchedIndex())">Back</a></div>
 	<div id="help">Help shows up here.</div>
 </div>
 
 <div id="scheduleHolder">
-<table id="schedule" cellspacing="0" cellpadding="0">
-<tbody>
-<tr>
-	<th width="3%">Time</th>
-	<th width="19%">Monday</th>
-	<th width="19%">Tuesday</th>
-	<th width="19%">Wednesday</th>
-	<th width="19%">Thursday</th>
-	<th width="19%">Friday</th>
-</tr>
+	<table id="schedule" cellspacing="0" cellpadding="0">
+		<tbody>
+			<tr>
+				<th width="3%">Time</th>
+				<th width="19%">Monday</th>
+				<th width="19%">Tuesday</th>
+				<th width="19%">Wednesday</th>
+				<th width="19%">Thursday</th>
+				<th width="19%">Friday</th>
+			</tr>
 <?php
 
 //Helper function for writing the default empty schedule. Subsequent redraws of the schedule are found in include/schedManager.js.
@@ -121,8 +125,8 @@ for ($i = 0; $i < 10; $i++) {
 }
 ?>
 
-</tbody>
-</table>
+		</tbody>
+	</table>
 </div>
 
 <?php
