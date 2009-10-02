@@ -1,0 +1,70 @@
+/**
+ * Author: Andrew Blaine
+ *
+ */
+
+/* _MAIN_COLORS
+ **************************************************************************/
+body { background-color: #333301;
+	font-family: "Helvetica", sans-serif; }/*TODO: Use font stack */
+.tabs .selected, #schedule thead tr { background-color: #993400; }
+.tabs li { background-color: #61613d; }
+#schedule thead tr { color: #ccc; }
+
+/* _COURSE_COLORS
+ **************************************************************************/
+/* TODO: Check all colors for contrast/similarity to others.. */
+.course0 { background-color: #ffca63; }
+.course1 { background-color: #9de855; }
+.course2 { background-color: #6afffa; }
+.course3 { background-color: #ff605e; }
+.course4 { background-color: #7a55e8; }
+.course5 { background-color: #d6e8a9; }
+.course6 { background-color: #ffe5bf; }
+.course7 { background-color: #c7fff3; }
+.course8 { background-color: #ffbacd; }
+.course9 { background-color: #aea9e8; }
+
+.tabs { float: left; }
+.tabs li { float: left; margin: 0 8px; }
+.tabs li a { display: block; padding: 4px 10px;
+	color: #fff; text-decoration: none; text-align: center; font-variant: small-caps; }
+
+#schedule { margin: 16px 8px 0; }
+#schedule table { width: 100%; clear: both; }
+#schedule td { width: 19.2%; }
+#schedule thead { text-align: center; }
+#schedule thead tr { font-weight: normal; }
+#schedule thead th,
+#schedule thead td { height: 30px; vertical-align: middle; }
+#schedule tbody th,
+#schedule tbody td { padding: 2px; }
+#schedule tbody th { text-align: center; min-width: 54px; font-weight: normal; }
+#schedule tbody td { border-left: 2px solid #e0e0e0; font-size: 12px; }
+
+#miscTabs { float: right; margin: -16px 8px 0 0; }
+#miscTabs li { border-top-style: none; }
+
+/*TODO: webkit declarations */
+#schedule ul li { border-radius: 6px 6px 0 0; -moz-border-radius: 6px 6px 0 0; }
+#miscTabs li { border-radius: 0 0 6px 6px; -moz-border-radius: 0 0 6px 6px; }
+
+input.idleField { background-color: #eee; color: #666; }
+select.idleField { color: #666; }
+
+#search { margin: 0 8px 16px; overflow-y: hidden; }
+#search1, #search2 { width: 50%; }
+#search1 { float: left; }
+#search2 { float: right; }
+#search1 form { margin-right: 8px; }
+#search2 form { margin-left: 8px; }
+#search input.clearButton,
+#search input.submitButton { width: 121px; font-size: 16px; }
+#search input.clearButton { background-color: #ff3c32; }
+#search input.submitButton { background-color: #8bff68; }
+
+#search ul { float: left; }
+#search form { padding: 10px 0; background-color: #993400; overflow-y: hidden; }
+#search select,
+#search input { float: left; width: 250px; margin: 0 0 0 8px; }
+#search form div { clear: left; width: 100%; padding: 8px 0; }
