@@ -49,8 +49,8 @@ body { background-color: #333301;
 #schedule ul li { border-radius: 6px 6px 0 0; -moz-border-radius: 6px 6px 0 0; }
 #miscTabs li { border-radius: 0 0 6px 6px; -moz-border-radius: 0 0 6px 6px; }
 
-input.idleField { background-color: #eee; color: #666; }
-select.idleField { color: #666; }
+.idleField { color: #2a532b; }
+input.idleField { background-color: #eee; }
 
 #search { margin: 0 8px 16px; overflow-y: hidden; }
 #search1, #search2 { width: 50%; }
@@ -67,4 +67,4 @@ select.idleField { color: #666; }
 #search form { padding: 10px 0; background-color: #993400; overflow-y: hidden; }
 #search select,
 #search input { float: left; width: 250px; margin: 0 0 0 8px; }
-#search form div { clear: left; width: 100%; padding: 8px 0; }
+#search form div { clear: left; margin: 0 auto; width: 50%; padding: 8px 0; }

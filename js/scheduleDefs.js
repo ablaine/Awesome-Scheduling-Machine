@@ -110,13 +110,13 @@ Course.createCourse = function (id, title, instructors, startTimes, endTimes) {
 	//TEMP: When we get DB functionality back, we may change the input format.
 	var noTime = "_";
 	function clean(arr) {
-		for (var i = 0; i < arr.length; i++) {
-			if (arr[i] === noTime) {
-				arr[i] = null;
+		$.each(arr, function (i, item) {
+			if (item === noTime) {
+				item = null;
 			} else {
-				arr[i] = Number(arr[i]);
+				item = Number(item);
 			}
-		}
+		});
 		return arr;
 	}
 
@@ -183,9 +183,9 @@ Schedule.prototype.removeCourse = function (course) {
 
 Schedule.prototype.getAllCourseIDs = function () {
 	var arr = [];
-	for (var i = 0; i < this.courses.length; i++) {
-		arr.push(this.courses[i].id);
-	}
+	$.each(this.courses, function (i, course) {
+		arr.push(course.id);
+	});
 	return arr;
 };
 
@@ -220,11 +220,11 @@ Schedule.prototype.toHTML = function () {
 		//			Track that time until subsequent times cease conflict with the course.
 		//				Now, set the rowspan of the initial time to be the difference between the initial and the current,
 		//				and set each array cell between the two times to be = "";
-		for (var dayIndex = 0; dayIndex < Globals.days.length; dayIndex++) {
-			var timeBlock = course.timeBlocks[Globals.days[dayIndex]];
+		var that = this;
+		$.each(Globals.days, function (dayIndex, day) {
+			var timeBlock = course.timeBlocks[day];
 			var firstTimeIndex = null;
-			for (var timeIndex = 0; timeIndex < Globals.times.length; timeIndex++) {
-				var time = Globals.times[timeIndex];
+			$.each(Globals.times, function (timeIndex, time) {
 				if (firstTimeIndex === null) {
 					//looking for the first block of this course
 					if (timeBlock.intersects(time)) {
@@ -234,17 +234,17 @@ Schedule.prototype.toHTML = function () {
 					if (!timeBlock.intersects(time)) {
 						//Set the rowspan
 						var rowspan = "rowspan='" + String(Number(timeIndex) - Number(firstTimeIndex)) + "'";
-						this.table[dayIndex][firstTimeIndex] = "<td " + rowspan + " class='" + course.id + "'>" + course.toHTML() + "</td>";
+						that.table[dayIndex][firstTimeIndex] = "<td " + rowspan + " class='" + course.id + "'>" + course.toHTML() + "</td>";
 						//Clear the intersecting <td /> from being printed by assigning the empty string
 						for (firstTimeIndex = firstTimeIndex + 1; firstTimeIndex < timeIndex; firstTimeIndex++) {
-							this.table[dayIndex][firstTimeIndex] = "";
+							that.table[dayIndex][firstTimeIndex] = "";
 						}
 						//Clear the tracker
 						firstTimeIndex = null;
 					}
 				}
-			}
-		}
+			});
+		});
 	};
 
 	/**
@@ -253,9 +253,10 @@ Schedule.prototype.toHTML = function () {
 	 * @param courses The array of courses to add.
 	 */
 	TableBuilder.prototype.addAllCourses = function (courses) {
-		for (var i = 0; i < courses.length; i++) {
-			this.addCourse(courses[i]);
-		}
+		var that = this;
+		$.each(courses, function (i, course) {
+			that.addCourse(course);
+		});
 	};
 
 	//First, build the 2dimensional array of <td /> cells
@@ -268,13 +269,13 @@ Schedule.prototype.toHTML = function () {
 	for (var timeIndex = 0; timeIndex < 20; timeIndex++) {
 		sched += "<tr>";
 		sched += "<th>" + Globals.times[timeIndex] + "</th>";
-		for (var dayIndex = 0; dayIndex < Globals.days.length; dayIndex++) {
+		$.each(Globals.days, function (dayIndex) {
 			if (typeof(table[dayIndex][timeIndex]) === "undefined") {
 				sched += "<td>&nbsp;</td>";
 			} else {
 				sched += table[dayIndex][timeIndex];
 			}
-		}
+		});
 		sched += "</tr>";
 	}
 	return sched;

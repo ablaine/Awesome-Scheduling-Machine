@@ -5,36 +5,51 @@
  * handlers.
  */
 
+"use strict";
+/*global window, $, console, ScheduleManager, Schedule, Course */
 
 // Starts executing upon the pages DOM being fully loaded.
 $(function () {
-	"use strict";
-	/*global $, console, ScheduleManager, Schedule, Course */
 
 	/**
 	 * Setup the form inputs with a nice compact description that disappears
 	 * on focus and reappears when focus is lost and there is no user input.
 	 *
-	 * Originally found on http://buildinternet.com , but has since seen numerous
+	 * Originally found on http://buildinternet.com, but has since seen numerous
 	 * modifications.
 	 */
 	(function () {
-		var inputs = $("input[type='text'], select");
-		inputs.addClass("idleField");
-		inputs.focus(function () {
+		//Handle the idleField/focusField classes
+		var fields = $("input[type='text'], select");
+		fields.addClass("idleField");
+		fields.focus(function () {
 			$(this).removeClass("idleField").addClass("focusField");
-			if ($(this).attr("defaultValue") === $(this).val()) {
-				$(this).val("");
-			} else {
-				$(this).select();
-			}
+		}).blur(function () {
+			$(this).removeClass("focusField").addClass("idleField");
 		});
 
-		inputs.blur(function () {
-			$(this).removeClass("focusField").addClass("idleField");
-			if ($.trim($(this).val()) === "") {
-				$(this).val($(this).attr("defaultValue"));
-			}
+		//Handle the smart textbox label
+		$("input[type='text']").each(function () {
+			var userMaxLength = $(this).attr("maxlength");
+			var descValue = $(this).attr("defaultValue");
+			var descMaxLength = descValue.length;
+			$(this).attr("maxlength", descMaxLength);//Start it off at max length
+			$(this).val(descValue);
+			$(this).focus(function () {
+				if (descValue === $(this).val()) {//No user data
+					//Must reset maxlength AFTER comparision for Safari
+					$(this).attr("maxlength", userMaxLength);//Set the max length for the user
+					$(this).val("");//Clear the field
+				} else {//User inputed data is present
+					$(this).select();//Select the text//TODO: broken in Safari/Chrome? unable to select reliably 
+				}
+			});
+			$(this).blur(function () {
+				if ($.trim($(this).val()) === "") {//Nothing is there
+					$(this).attr("maxlength", descMaxLength);//Increase the max length
+					$(this).val(descValue);//Reassign the field description
+				}
+			});
 		});
 	}());
 

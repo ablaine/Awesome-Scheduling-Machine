@@ -71,9 +71,9 @@ ScheduleManager.prototype._update = function () {
 
 		//Color the courses
 		var classNames = that._getCurrentSchedule().getAllCourseIDs();
-		for (var i = 0; i < classNames.length; i++) {
-			$("#schedule tbody td[class=" + classNames[i] + "]").addClass("course" + i);
-		}
+		$.each(classNames, function (i, className) {
+			$("#schedule tbody td[class=" + className + "]").addClass("course" + i);
+		});
 	});
 	//Refresh the page by clicking on the current tab
 	this._getCurrentTab().find("a").click();
