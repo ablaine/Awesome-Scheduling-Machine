@@ -8,7 +8,7 @@
  */
 
 "use strict";
-/*global $, console, window */
+/*global $, console, window, Globals */
 
 /*	TIMEBLOCK
  ******************************************************************************/
@@ -131,16 +131,53 @@ Course.createCourse = function (id, title, instructors, startTimes, endTimes) {
 	return new Course(id, title, instructors.split("; "), timeBlocks);
 };
 
+/*	TAB
+ ******************************************************************************/
+
+/**
+ * Constructor
+ *
+ * Represents a single tab.
+ */
+function Tab(elem) {
+	var varElem = elem;
+	var anchor = varElem.find("a");
+
+	/**
+	 * Returns the "li" part of the tab.
+	 */
+	this.getElem = function () { return varElem; };
+
+	/**
+	 * Returns the "a" part of the tab.
+	 */
+	this.getAnchor = function () { return anchor; };
+}
+
+/**
+ * Updates the html to whether or not this tab is the current one.
+ */
+Tab.prototype.setCurrent = function (current) {
+	if (current) {
+		this.getElem().addClass("selected");
+	} else {
+		this.getElem().removeClass("selected");
+	}
+};
+
 /*	SCHEDULE
  ******************************************************************************/
 
 /**
  * Constructor
  * 
- * Represents a single schedule, which is an array of courses.
+ * Represents a single schedule.
  */
-function Schedule() {
+function Schedule(tab) {
 	this.courses = [];
+
+	var varTab = tab;
+	this.getTab = function () { return varTab; };
 }
 
 /**
@@ -234,7 +271,8 @@ Schedule.prototype.toHTML = function () {
 					if (!timeBlock.intersects(time)) {
 						//Set the rowspan
 						var rowspan = "rowspan='" + String(Number(timeIndex) - Number(firstTimeIndex)) + "'";
-						that.table[dayIndex][firstTimeIndex] = "<td " + rowspan + " class='" + course.id + "'>" + course.toHTML() + "</td>";
+						//NOTE: the course.id should always be the first class listed
+						that.table[dayIndex][firstTimeIndex] = "<td " + rowspan + " class='" + course.id + " class'>" + course.toHTML() + "</td>";
 						//Clear the intersecting <td /> from being printed by assigning the empty string
 						for (firstTimeIndex = firstTimeIndex + 1; firstTimeIndex < timeIndex; firstTimeIndex++) {
 							that.table[dayIndex][firstTimeIndex] = "";

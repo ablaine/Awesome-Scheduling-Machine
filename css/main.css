@@ -25,7 +25,9 @@ body { background-color: #333301;
 .course8 { background-color: #ffbacd; }
 .course9 { background-color: #aea9e8; }
 
-.tabs { float: left; }
+.remove { float: right; color: #f00; text-decoration: none; cursor: pointer; }
+
+.tabs { float: left; cursor: pointer; }
 .tabs li { float: left; margin: 0 8px; }
 .tabs li a { display: block; padding: 4px 10px;
 	color: #fff; text-decoration: none; text-align: center; font-variant: small-caps; }

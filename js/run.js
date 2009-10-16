@@ -41,7 +41,8 @@ $(function () {
 					$(this).attr("maxlength", userMaxLength);//Set the max length for the user
 					$(this).val("");//Clear the field
 				} else {//User inputed data is present
-					$(this).select();//Select the text//TODO: broken in Safari/Chrome? unable to select reliably 
+					$(this).select();//Select the text
+					//BUG Confirmed with Safari/Chrome @ [Bug 22691] https://lists.webkit.org/pipermail/webkit-unassigned/2009-September/132567.html
 				}
 			});
 			$(this).blur(function () {
@@ -53,18 +54,10 @@ $(function () {
 		});
 	}());
 
-	/**
-	 * Create a ScheduleManager instance and add 3 extra schedules, bringing the total
-	 * schedules to 4. (by default, instantiation makes 1)
-	 */
-	//TODO: Setup constructor to take an optional # of scheds to create.
-	//var scheduleManager = new ScheduleManager(4); //Would have 4 schedules
-	//Should still not be possible to create scheduleManager with 0.
-	var scheduleManager = new ScheduleManager();
-	scheduleManager.addSchedule();
-	scheduleManager.addSchedule();
-	scheduleManager.addSchedule();
+	//Create our schedule manager. Initiated at 4 schedules.
+	var scheduleManager = ScheduleManager.createScheduleManager(4);
 
+	//TEMP
 	/**
 	 * Declare the handlers for success/failure of actions. Also, test the addition
 	 * and removal of some premade courses.
@@ -72,10 +65,11 @@ $(function () {
 	(function () {
 		//TODO: Eventually rework these to warn the user that the command failed.
 		function tryAdd(sched, course) {
-			if (scheduleManager.addCourse(sched, course)) {
+			if (scheduleManager.getSchedule(sched).addCourse(course)) {
 				if (window.console) {
 					console.log("Added course: ", course);
 				}
+				scheduleManager.update();
 			} else {
 				if (window.console) {
 					console.log("Unable to add course: ", course);
@@ -86,10 +80,11 @@ $(function () {
 		//In a working system, the user should not be able to remove a class and receive a failure, so
 		// no need to build in any warning mechanism here.
 		function tryRm(sched, course) {
-			if (scheduleManager.removeCourse(sched, course)) {
+			if (scheduleManager.getSchedule(sched).removeCourse(course)) {
 				if (window.console) {
 					console.log("Removed course: ", course);
 				}
+				scheduleManager.update();
 			} else {
 				if (window.console) {
 					console.log("Unable to remove course: ", course);
@@ -97,7 +92,6 @@ $(function () {
 			}
 		}
 
-		//TEMP
 		//Example courses
 		var software = Course.createCourse("CSCI340A", "Software Engineering", "Sawin, Jason", "1500;1500;_;1500;1500", "1550;1550;0;1550;1550");
 		var eCommerce = Course.createCourse("CSCI250A", "Electronic Commerce", "Bentson, Randy", "1200;1200;_;1200;1200", "1250;1250;0;1250;1250");
