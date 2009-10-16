@@ -7,6 +7,9 @@
  * 
  */
 
+"use strict";
+/*global $ */
+
 // Array Remove - By John Resig (MIT Licensed)
 if (!Array.prototype.remove) {
 	Array.prototype.remove = function (from, to) {

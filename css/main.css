@@ -55,11 +55,12 @@ body { background-color: #333301;
 input.idleField { background-color: #eee; }
 
 #search { margin: 0 8px 16px; overflow-y: hidden; }
+#search form { -moz-border-radius: 0 0 6px 6px; }
 #search1, #search2 { width: 50%; }
 #search1 { float: left; }
 #search2 { float: right; }
-#search1 form { margin-right: 8px; }
-#search2 form { margin-left: 8px; }
+#search1 form { margin: 0 8px; }
+#search2 form { margin: 0 8px; }
 #search input.clearButton,
 #search input.submitButton { width: 121px; font-size: 16px; }
 #search input.clearButton { background-color: #ff3c32; }
