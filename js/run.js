@@ -63,7 +63,16 @@ $(function () {
 	 * and removal of some premade courses.
 	 */
 	(function () {
-		//TODO: Eventually rework these to warn the user that the command failed.
+		var displayErrors = false;
+
+		function userError() {//TODO: Probably rework this into a UI class
+			if (displayErrors) {
+				var table = $("#schedule tbody");
+				table.animate({ "opacity": "-=0.1" }, 100);
+				table.animate({ "opacity": "+=0.1" }, 300);
+			}
+		}
+
 		function tryAdd(sched, course) {
 			if (scheduleManager.getSchedule(sched).addCourse(course)) {
 				if (window.console) {
@@ -74,6 +83,7 @@ $(function () {
 				if (window.console) {
 					console.log("Unable to add course: ", course);
 				}
+				userError();
 			}
 		}
 
@@ -89,6 +99,7 @@ $(function () {
 				if (window.console) {
 					console.log("Unable to remove course: ", course);
 				}
+				userError();
 			}
 		}
 
