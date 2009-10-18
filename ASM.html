@@ -59,69 +59,66 @@
 		</div>
 
 		<!-- TODO: Just use ajax to pull in instructor/department and such. -->
-		<div id="search">
-			<div id="search1">
-				<form>
-					<div>
-						<select name="instructor">
-							<option value="">&lt;Instructor&gt;</option>
-							<option value="blah">blah</option>
-						</select>
-					</div>
-					<div>
-						<select name="department">
-							<option value="">&lt;Department&gt;</option>
-							<option value="blah">blah</option>
-						</select>
-					</div>
-					<div>
-						<input type="text" maxlength="3" size="17" name="courseNumber" value="&nbsp;&nbsp;&lt;Course Number&gt;" />
-					</div>
-					<div>
-						<input type="text" maxlength="4" size="14" name="startTime" value="&nbsp;&nbsp;&lt;Start Time&gt;" />
-					</div>
-					<div>
-						<select name="coreFulfillment">
-							<option value="">&lt;Core Fulfillment&gt;</option>
-						</select>
-					</div>
-					<div>
-						<input class="clearButton" type="reset" value="Clear" />
-						<input class="submitButton" type="button" value="Submit" />
-					</div>
-				</form>
-			</div>
+		<div class="footer">
+		
+			<div class="search results">
+				<div class="container">
+					<div class="search">
+						<form>
+							<div>
+								<select name="instructor">
+									<option value="">&lt;Instructor&gt;</option>
+									<option value="blah">blah</option>
+								</select>
+							</div>
+							<div>
+								<select name="department">
+									<option value="">&lt;Department&gt;</option>
+									<option value="blah">blah</option>
+								</select>
+							</div>
+							<div>
+								<input type="text" maxlength="3" size="17" name="courseNumber" value="&nbsp;&nbsp;&lt;Course Number&gt;" />
+							</div>
+							<div>
+								<input type="text" maxlength="4" size="14" name="startTime" value="&nbsp;&nbsp;&lt;Start Time&gt;" />
+							</div>
+							<div>
+								<select name="coreFulfillment">
+									<option value="">&lt;Core Fulfillment&gt;</option>
+								</select>
+							</div>
+							<div>
+								<input class="button half clear" type="reset" value="Clear" />
+								<input class="button half submit" type="button" value="Submit" />
+							</div>
+						</form>
+					</div><!-- .search -->
+					<div class="results">
+						<table>
+							<thead>
+								<tr>
+									<td>Course</td>
+									<td>Title</td>
+									<td>Days/Times</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Sorry, no results yet.</td>
+								</tr>
+							</tbody>
+						</table>
+						<div>
+							<input class="button" type="button" value="Go back" />
+						</div>
+					</div><!-- .results -->
+				</div><!-- .container -->
+			</div><!-- .search.results -->
 
-			<div id="search2">
-				<form>
-					<div>
-						<select name="instructor">
-							<option value="">&lt;Instructor&gt;</option>
-						</select>
-					</div>
-					<div>
-						<select name="department">
-							<option value="">&lt;Department&gt;</option>
-						</select>
-					</div>
-					<div>
-						<input type="text" maxlength="3" size="17" name="courseNumber" value="&nbsp;&nbsp;&lt;Course Number&gt;" />
-					</div>
-					<div>
-						<input type="text" maxlength="4" size="14" name="startTime" value="&nbsp;&nbsp;&lt;Start Time&gt;" />
-					</div>
-					<div>
-						<select name="coreFulfillment">
-							<option value="">&lt;Core Fulfillment&gt;</option>
-						</select>
-					</div>
-					<div>
-						<input class="clearButton" type="reset" value="Clear" />
-						<input class="submitButton" type="button" value="Submit" />
-					</div>
-				</form>
-			</div>
-		</div>
+			<!-- jQuery will duplicate the above table here. -->
+
+		</div><!-- .footer -->
 
 		<script type="text/javascript" src="js/lib/jquery-1.3.2.min.js"></script>
 		<script type="text/javascript" src="js/utilities.js"></script>

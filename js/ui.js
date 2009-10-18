@@ -54,9 +54,38 @@ function UI(settings) {
 			});
 		});
 	}());
+
+	(function () {
+		var lSearchResults = $(".footer .search.results");
+		var rSearchResults = lSearchResults.clone().appendTo(".footer");
+		var search  = lSearchResults.find(".search").add(rSearchResults.find(".search"));
+		var results = lSearchResults.find(".results").add(rSearchResults.find(".results"));
+
+		results.hide();
+
+		search.find("input[class*='submit']").click(function () {
+			var par = $(this).parents(".search.results");
+			par.find(".search").hide();
+			par.find(".results").show();
+
+			//TEMPORARY filling the schedule.
+			var table = "";
+			table += Temp.software.toResultsTableRow("valid");
+			table += Temp.eCommerce.toResultsTableRow("valid");
+			table += Temp.networking.toResultsTableRow("invalid");
+
+			par.find(".results table tbody").html(table);
+		});
+
+		results.find("input[class*='button']").click(function () {
+			var par = $(this).parents(".search.results");
+			par.find(".search").show();
+			par.find(".results").hide();
+		});
+
+	}());
 }
 
-//We want to avoid doing this as much as possible by disabling controls and whatnot
 UI.prototype.displayError = function () {
 	if (this.settings.displayErrors) {
 		var table = $("#schedule tbody");
@@ -97,3 +126,9 @@ function UISettings() {
 	this.displayErrors = true;
 	this.debug = window.console !== undefined;
 }
+
+//Temporary namespace
+function Temp() { }
+Temp.software = Course.createCourse("CSCI340A", "Software Engineering", "Sawin, Jason", "1500;1500;_;1500;1500", "1550;1550;0;1550;1550");
+Temp.eCommerce = Course.createCourse("CSCI250A", "Electronic Commerce", "Bentson, Randy", "1200;1200;_;1200;1200", "1250;1250;0;1250;1250");
+Temp.networking = Course.createCourse("CSCI325A", "Network Programming", "Richards, Brad", "1200;1230;_;1230;1200", "1250;1320;0;1320;1250");

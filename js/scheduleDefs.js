@@ -51,6 +51,10 @@ TimeBlock.prototype.intersects = function (hour) {
 	return this.startTime <= Number(hour) && Number(hour) <= this.endTime;
 };
 
+/*	COURSEINFO
+ ******************************************************************************/
+//TODO possibly..
+
 /*	COURSE
  ******************************************************************************/
 
@@ -63,6 +67,10 @@ TimeBlock.prototype.intersects = function (hour) {
 function Course(id, title, instructors, timeBlocks) {//TODO: , enrolled, units) {
 	this.id = id;
 	this.title = title;
+	this.core = "&nbsp;";
+	this.enrolled = 12;//TEMP
+	this.enrolledMax = 24;//TEMP
+	this.times = "_M___F_ 1200&ndash;1250<br />__T_T__ 1230&ndash;1320";//TEMP
 	this.instructors = instructors;
 	this.timeBlocks = timeBlocks;
 }
@@ -90,6 +98,20 @@ Course.prototype.hasConflict = function (course) {
  */
 Course.prototype.toHTML = function () {
 	return this.id + " : " + this.title + "<br />" + this.instructors;
+};
+
+Course.prototype.toResultsTableRow = function (theClass) {
+	if (theClass === undefined) {
+		theClass = "";
+	}
+	return	"<tr class='" + theClass + "'>" +
+				"<th>" + this.id + "</th>" +
+				"<td>" +
+					"<span class='title'>" + this.title + "</span>" +
+					"<span class='instructor'>" + this.instructors + "</span>" +
+				"</td>" +
+				"<td>" + this.times + "</td>" +
+			"</tr>";
 };
 
 /**
