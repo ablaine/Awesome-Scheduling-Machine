@@ -11,80 +11,24 @@ function UI(settings) {
 	this.settings = settings;
 	//Create the schedule manager. Initiated at 4 schedules.
 	this.scheduleManager = ScheduleManager.createScheduleManager(4);
-
-	/**
-	 * Setup the form inputs with a nice compact description that disappears
-	 * on focus and reappears when focus is lost and there is no user input.
-	 *
-	 * Originally found on http://buildinternet.com, but has since seen numerous
-	 * modifications.
-	 */
-	(function () {
-		//Handle the idleField/focusField classes
-		var fields = $("input[type='text'], select");
-		fields.addClass("idleField");
-		fields.focus(function () {
-			$(this).removeClass("idleField").addClass("focusField");
-		}).blur(function () {
-			$(this).removeClass("focusField").addClass("idleField");
-		});
-
-		//Handle the smart textbox label
-		$("input[type='text']").each(function () {
-			var userMaxLength = $(this).attr("maxlength");
-			var descValue = $(this).attr("defaultValue");
-			var descMaxLength = descValue.length;
-			$(this).attr("maxlength", descMaxLength);//Start it off at max length
-			$(this).val(descValue);
-			$(this).focus(function () {
-				if (descValue === $(this).val()) {//No user data
-					//Must reset maxlength AFTER comparision for Safari
-					$(this).attr("maxlength", userMaxLength);//Set the max length for the user
-					$(this).val("");//Clear the field
-				} else {//User inputed data is present
-					$(this).select();//Select the text
-					//BUG Confirmed with Safari/Chrome @ [Bug 22691] https://lists.webkit.org/pipermail/webkit-unassigned/2009-September/132567.html
-				}
-			});
-			$(this).blur(function () {
-				if ($.trim($(this).val()) === "") {//Nothing is there
-					$(this).attr("maxlength", descMaxLength);//Increase the max length
-					$(this).val(descValue);//Reassign the field description
-				}
-			});
-		});
-	}());
-
-	(function () {
-		var lSearchResults = $(".footer .search.results");
-		var rSearchResults = lSearchResults.clone().appendTo(".footer");
-		var search  = lSearchResults.find(".search").add(rSearchResults.find(".search"));
-		var results = lSearchResults.find(".results").add(rSearchResults.find(".results"));
-
-		results.hide();
-
-		search.find("input[class*='submit']").click(function () {
-			var par = $(this).parents(".search.results");
-			par.find(".search").hide();
-			par.find(".results").show();
-
-			//TEMPORARY filling the schedule.
-			var table = "";
-			table += Temp.software.toResultsTableRow("valid");
-			table += Temp.eCommerce.toResultsTableRow("valid");
-			table += Temp.networking.toResultsTableRow("invalid");
-
-			par.find(".results table tbody").html(table);
-		});
-
-		results.find("input[class*='button']").click(function () {
-			var par = $(this).parents(".search.results");
-			par.find(".search").show();
-			par.find(".results").hide();
-		});
-
-	}());
+	
+	this.lSearchResult = null;
+	this.RSearchResult = null;
+	
+	this._init();
 }
+
+UI.prototype._init = function () {
+	var lSRElem = $(".footer .searchResult");
+	var lSearch			= new Search(lSRElem.find(".search"));
+	var lResult			= new Result(lSRElem.find(".result"), this.scheduleManager);
+	this.lSearchResult	= new SearchResult(lSRElem, lSearch, lResult);
+
+	var rSRElem = $(".footer .searchResult").clone().appendTo(".footer");
+	var rSearch			= new Search(rSRElem.find(".search"));
+	var rResult			= new Result(rSRElem.find(".result"), this.scheduleManager);
+	this.rSearchResult	= new SearchResult(rSRElem, rSearch, rResult);
+};
 
 UI.prototype.displayError = function () {
 	if (this.settings.displayErrors) {
@@ -122,10 +66,15 @@ UI.prototype.tryRemoveCourse = function (course) {
 	}
 };
 
-function UISettings() {
-	this.displayErrors = true;
-	this.debug = window.console !== undefined;
+//Settings
+function UISettings(userErrors, debug) {
+	this.displayErrors = userErrors;
+	this.debug = debug;
 }
+
+UISettings.createDefault = function () {
+	return new UISettings(true, window.console !== undefined);
+};
 
 //Temporary namespace
 function Temp() { }

@@ -254,73 +254,8 @@ Schedule.prototype.getAllCourseIDs = function () {
  * @return A string to be placed inside a <table /> element and rendered as HTML.
  */
 Schedule.prototype.toHTML = function () {
-	/**
-	 * Constructor
-	 *
-	 * This is a temporary helper class for arranging the schedule into a 2D array of its 'table' <td /> cells.
-	 * Cells that are left "undefined" are intended to be replaced with <td>&nbsp;</td>. It is not recommended to
-	 * use this class outside of the Schedule class.
-	 */
-	function TableBuilder() {
-		this.table = [ [], [], [], [], [] ];
-	}
-
-	/**
-	 * Adds this course to the 2d table array, handling rowspan values along the way.
-	 * 
-	 * @param course The course to add.
-	 */
-	TableBuilder.prototype.addCourse = function (course) {
-		// This algorithm is applied in full per course. It is assumed that no two courses have conflicting times.
-		//Algorithm:
-		//	For each day,
-		//		iterate through each time,
-		//			until you find a time the course conflicts with.
-		//			Track that time until subsequent times cease conflict with the course.
-		//				Now, set the rowspan of the initial time to be the difference between the initial and the current,
-		//				and set each array cell between the two times to be = "";
-		var that = this;
-		$.each(Globals.days, function (dayIndex, day) {
-			var timeBlock = course.timeBlocks[day];
-			var firstTimeIndex = null;
-			$.each(Globals.times, function (timeIndex, time) {
-				if (firstTimeIndex === null) {
-					//looking for the first block of this course
-					if (timeBlock.intersects(time)) {
-						firstTimeIndex = timeIndex;//Found first
-					}
-				} else {
-					if (!timeBlock.intersects(time)) {
-						//Set the rowspan
-						var rowspan = "rowspan='" + String(Number(timeIndex) - Number(firstTimeIndex)) + "'";
-						//NOTE: the course.id should always be the first class listed
-						that.table[dayIndex][firstTimeIndex] = "<td " + rowspan + " class='" + course.id + " class'>" + course.toHTML() + "</td>";
-						//Clear the intersecting <td /> from being printed by assigning the empty string
-						for (firstTimeIndex = firstTimeIndex + 1; firstTimeIndex < timeIndex; firstTimeIndex++) {
-							that.table[dayIndex][firstTimeIndex] = "";
-						}
-						//Clear the tracker
-						firstTimeIndex = null;
-					}
-				}
-			});
-		});
-	};
-
-	/**
-	 * Adds a collection of courses to the 2d table array.
-	 * 
-	 * @param courses The array of courses to add.
-	 */
-	TableBuilder.prototype.addAllCourses = function (courses) {
-		var that = this;
-		$.each(courses, function (i, course) {
-			that.addCourse(course);
-		});
-	};
-
 	//First, build the 2dimensional array of <td /> cells
-	var tableBuilder = new TableBuilder();
+	var tableBuilder = new _TableBuilder();
 	tableBuilder.addAllCourses(this.courses);
 
 	//Now, iterate over the 2d array and output the 2d array cells if defined and <td>&nbsp;</td> otherwise 
@@ -339,5 +274,70 @@ Schedule.prototype.toHTML = function () {
 		sched += "</tr>";
 	}
 	return sched;
+};
+
+/**
+ * Constructor
+ *
+ * This is a temporary helper class for arranging the schedule into a 2D array of its 'table' <td /> cells.
+ * Cells that are left "undefined" are intended to be replaced with <td>&nbsp;</td>. It is not recommended to
+ * use this class outside of the Schedule class.
+ */
+function _TableBuilder() {
+	this.table = [ [], [], [], [], [] ];
+}
+
+/**
+ * Adds this course to the 2d table array, handling rowspan values along the way.
+ * 
+ * @param course The course to add.
+ */
+_TableBuilder.prototype._addCourse = function (course) {
+	// This algorithm is applied in full per course. It is assumed that no two courses have conflicting times.
+	//Algorithm:
+	//	For each day,
+	//		iterate through each time,
+	//			until you find a time the course conflicts with.
+	//			Track that time until subsequent times cease conflict with the course.
+	//				Now, set the rowspan of the initial time to be the difference between the initial and the current,
+	//				and set each array cell between the two times to be = "";
+	var that = this;
+	$.each(Globals.days, function (dayIndex, day) {
+		var timeBlock = course.timeBlocks[day];
+		var firstTimeIndex = null;
+		$.each(Globals.times, function (timeIndex, time) {
+			if (firstTimeIndex === null) {
+				//looking for the first block of this course
+				if (timeBlock.intersects(time)) {
+					firstTimeIndex = timeIndex;//Found first
+				}
+			} else {
+				if (!timeBlock.intersects(time)) {
+					//Set the rowspan
+					var rowspan = "rowspan='" + String(Number(timeIndex) - Number(firstTimeIndex)) + "'";
+					//NOTE: the course.id should always be the first class listed
+					that.table[dayIndex][firstTimeIndex] = "<td " + rowspan + " class='" + course.id + " class'>" + course.toHTML() + "</td>";
+					//Clear the intersecting <td /> from being printed by assigning the empty string
+					for (firstTimeIndex = firstTimeIndex + 1; firstTimeIndex < timeIndex; firstTimeIndex++) {
+						that.table[dayIndex][firstTimeIndex] = "";
+					}
+					//Clear the tracker
+					firstTimeIndex = null;
+				}
+			}
+		});
+	});
+};
+
+/**
+ * Adds a collection of courses to the 2d table array.
+ * 
+ * @param courses The array of courses to add.
+ */
+_TableBuilder.prototype.addAllCourses = function (courses) {
+	var that = this;
+	$.each(courses, function (i, course) {
+		that._addCourse(course);
+	});
 };
 

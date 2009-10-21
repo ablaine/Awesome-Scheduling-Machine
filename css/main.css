@@ -56,32 +56,32 @@ input.idleField { background-color: #eee; }
 
 /* FOOTER */
 .footer { margin: 0 8px 16px; overflow-y: hidden; }
-.footer .search.results { width: 50%; float: left; }
-.footer .search.results .container { margin: 0 8px; padding: 10px 0; overflow-y: hidden; background-color: #993400; }
-.footer .search.results .container { -moz-border-radius: 0 0 6px 6px; }
-.footer .search.results .container div div { margin: 0 auto; padding: 2px 0; width: 50%; }
-.footer .search.results select,
-.footer .search.results input { width: 250px; }
-.footer .search.results .button { margin-top: 8px; font-size: 16px; background-color: #8bff68; }
-.footer .search.results .button.half { width: 121px; }
-.footer .search.results .button.clear { background-color: #ff3c32; }
-.footer .search.results .button.submit { margin: 0 0 0 8px; }
+.footer .searchResult { width: 50%; float: left; }
+.footer .searchResult .container { margin: 0 8px; padding: 10px 0; overflow-y: hidden; background-color: #993400; }
+.footer .searchResult .container { -moz-border-radius: 0 0 6px 6px; }
+.footer .searchResult .container div div { margin: 0 auto; padding: 2px 0; width: 50%; }
+.footer .searchResult select,
+.footer .searchResult input { width: 250px; }
+.footer .searchResult .button { margin-top: 8px; font-size: 16px; background-color: #8bff68; }
+.footer .searchResult .button.half { width: 121px; }
+.footer .searchResult .button.clear { background-color: #ff3c32; }
+.footer .searchResult .button.submit { margin: 0 0 0 8px; }
 
 /* RESULTS */
-.search.results .results { margin: 0 8px; }
-.search.results .results table { width: 100%; border: 2px solid #333; background-color: #fff; font-family: monospace; }
-.search.results .results table thead tr { font-size: 16px; text-align: center; font-weight: bold; border-bottom: 2px solid #333; background-color: #ccc; }
-.search.results .results tbody td,
-.search.results .results tbody th { padding: 4px 6px; }
-.search.results .results tbody th { font-weight: normal; text-align: left; }
-.search.results .results tbody td { border-left: 2px solid #333; }
-.search.results .results tbody td span { display: block; }
-.search.results .results tbody td span.title { font-weight: bold; }
-/*.search.results .results tbody tr { border-bottom: 1px solid #ddd; }*/
+.searchResult .result { margin: 0 8px; }
+.searchResult .result table { width: 100%; border: 2px solid #333; background-color: #fff; font-family: monospace; }
+.searchResult .result table thead tr { font-size: 16px; text-align: center; font-weight: bold; border-bottom: 2px solid #333; background-color: #ccc; }
+.searchResult .result tbody td,
+.searchResult .result tbody th { padding: 4px 6px; }
+.searchResult .result tbody th { font-weight: normal; text-align: left; }
+.searchResult .result tbody td { border-left: 2px solid #333; }
+.searchResult .result tbody td span { display: block; }
+.searchResult .result tbody td span.title { font-weight: bold; }
+/*.searchResult .result tbody tr { border-bottom: 1px solid #ddd; }*/
 
-.search.results .results tbody tr.valid { background-color: #afa; }
-.search.results .results tbody tr.valid:hover { background-color: #8f8; cursor: pointer; }
-.search.results .results tbody tr.invalid { background-color: #faa; }
-.search.results .results tbody tr.invalid:hover { background-color: #f99; cursor: pointer; }
-.search.results .results tbody tr.used { background-color: #aaa; }/* On the current schedule */
-.search.results .results tbody tr.used:hover { background-color: #888; cursor: pointer; }/* On the current schedule */
+.searchResult .result tbody tr.valid { background-color: #afa; }
+.searchResult .result tbody tr.valid:hover { background-color: #8f8; cursor: pointer; }
+.searchResult .result tbody tr.invalid { background-color: #faa; }
+.searchResult .result tbody tr.invalid:hover { background-color: #f99; cursor: pointer; }
+.searchResult .result tbody tr.used { background-color: #aaa; }/* On the current schedule */
+.searchResult .result tbody tr.used:hover { background-color: #888; cursor: pointer; }/* On the current schedule */

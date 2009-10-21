@@ -9,7 +9,7 @@
 // Starts executing upon the pages DOM being fully loaded.
 $(function () {
 
-	var ui = new UI(new UISettings());
+	var ui = new UI(UISettings.createDefault());
 	
 	ui.tryAddCourse(Temp.software);
 	ui.tryAddCourse(Temp.eCommerce);
